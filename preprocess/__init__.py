@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import List, Iterator
 
 from gensim.utils import simple_preprocess
-from tex_doc import split_tex_doc
+from preprocess.tex_doc import split_tex_doc
 
 
 class AbsPreprocessor(metaclass=ABCMeta):
