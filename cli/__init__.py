@@ -1,0 +1,54 @@
+import argparse
+
+
+def add_argument_for_document(parser):
+  parser.add_argument('--document')
+  parser.add_argument('--preprocess')
+
+
+def add_argument_to_train(parser):
+  add_argument_for_document(parser)
+  parser.add_argument('--save_model')
+
+
+def add_argument_to_infer(parser):
+  add_argument_for_document(parser)
+  parser.add_argument('--load_model')
+
+
+def parse_args(args):
+  """
+  argsはsys.argv[1:]を想定している
+  """
+  parser = argparse.ArgumentParser()
+  subparsers = parser.add_subparsers(dest="mode")
+  add_argument_to_train(subparsers.add_parser("train", help="学習"))
+  add_argument_to_infer(subparsers.add_parser("infer", help="実行"))
+  add_argument_for_dataset(subparsers.add_parser("dataset", help="dataset"))
+  return parser.parse_known_args(args)
+
+
+def add_model_detail_args(parser):
+  add_model_args(parser)
+  add_preprocess_args(parser)
+
+
+def add_model_args(parser):
+  pass
+
+
+def add_argument_for_dataset(parser):
+  subparsers = parser.add_subparsers(dest="dataset_mode")
+  add_argument_for_json_arxiv_data(
+      subparsers.add_parser("json_arxiv", help="arXivのデータを今回用に加工"))
+
+
+def add_argument_for_json_arxiv_data(parser):
+  parser.add_argument('--input', required=True)
+  parser.add_argument('--output', required=True)
+
+
+def add_preprocess_args(parser):
+  subparsers = parser.add_subparsers(dest="mode")
+  add_argument_to_tex(subparsers.add_parser("tex", help="$\\TeX$"))
+  add_argument_to_normal(subparsers.add_parser("normal", help="素朴な方法"))
