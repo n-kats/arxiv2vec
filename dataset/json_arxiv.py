@@ -5,13 +5,13 @@ import re
 NEW_LINE_RGX = re.compile("\n\s*")
 
 
-def run(input_: str, output: str):
-  input_abs = os.path.abspath(input_)
+def run(inputs: str, output: str):
   output_abs = os.path.abspath(output)
-  with open(input_abs) as f_in, open(output_abs, "w") as f_out:
-    for l in f_in:
-      obj = json.loads(l)
-      f_out.write(_fix_needless_new_line(obj["abstract"]) + "\n")
+  with open(output_abs, "w") as f_out:
+    for input_ in inputs:
+      input_abs = os.path.abspath(input_)
+      for obj in json.load(open(input_abs)):
+        f_out.write(_fix_needless_new_line(obj["summary"]) + "\n")
 
 
 def _fix_needless_new_line(s: str):

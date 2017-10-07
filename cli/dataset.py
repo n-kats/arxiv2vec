@@ -5,5 +5,5 @@ def add_argument_for_dataset(parser):
 
 
 def add_argument_for_json_arxiv_data(parser):
-  parser.add_argument('--input', required=True)
+  parser.add_argument('--input', required=True, nargs='+')
   parser.add_argument('--output', required=True)
