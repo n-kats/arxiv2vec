@@ -1,5 +1,7 @@
 import argparse
 
+from cli.dataset import add_argument_for_dataset
+
 
 def add_argument_for_document(parser):
   parser.add_argument('--document')
@@ -37,18 +39,7 @@ def add_model_args(parser):
   pass
 
 
-def add_argument_for_dataset(parser):
-  subparsers = parser.add_subparsers(dest="dataset_mode")
-  add_argument_for_json_arxiv_data(
-      subparsers.add_parser("json_arxiv", help="arXivのデータを今回用に加工"))
-
-
-def add_argument_for_json_arxiv_data(parser):
-  parser.add_argument('--input', required=True)
-  parser.add_argument('--output', required=True)
-
-
 def add_preprocess_args(parser):
-  subparsers = parser.add_subparsers(dest="mode")
+  subparsers = parser.add_subparsers(dest="preprocess_mode")
   add_argument_to_tex(subparsers.add_parser("tex", help="$\\TeX$"))
   add_argument_to_normal(subparsers.add_parser("normal", help="素朴な方法"))
