@@ -3,6 +3,7 @@ import sys
 import cli
 import dataset.json_arxiv
 from cli import parse_args
+from actions import train, infer
 
 
 def main():
@@ -13,14 +14,8 @@ def main():
     trainの場合は、モデルや前処理の設定が混在して、
     それらを分離するために複数のparserを使っている
     """
-    model_args, unknown = cli.parse_model_args(unknown)
-    preprocess = cli.parse_preprocess_args(
-        args.preprocess, unknown)
-    train.run(
-        document=args.document,
-        model_args=model_config,
-        preprocess_args=preprocess,
-        save_model=args.save_model)
+    args = cli.parse_train_args(unknown)
+    train.run(args)
   elif mode == "infer":
     infer.run(
         document=args.document,
