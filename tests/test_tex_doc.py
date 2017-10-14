@@ -23,5 +23,6 @@ class TeXDocTest(unittest.TestCase):
     print(split_tex_doc("2 $$M$$ is not an $n$-manifold."))
     print(split_tex_doc("2 $$M$ is not an $n$-manifold."))
 
+
 if __name__ == '__main__':
   unittest.main()

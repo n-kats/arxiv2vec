@@ -1,13 +1,14 @@
+from typing import List
 import argparse
 
 
-def add_argument_to_train(parser):
+def add_argument_to_train(parser: argparse.ArgumentParser):
   """
   何もしない
   """
 
 
-def parse_train_args(args):
+def parse_train_args(args: List[str]):
   parser = argparse.ArgumentParser()
   parser.add_argument("--model", required=True)
   parser.add_argument("--preprocess", required=True)
@@ -18,14 +19,15 @@ def parse_train_args(args):
   return parser.parse_args(args)
 
 
-def add_model_args(model_name, parser):
-  parser.add_argument('--save_model')
+def add_model_args(model_name: str, parser: argparse.ArgumentParser):
+  parser.add_argument('--save_model', required=True)
 
 
-def add_document_args(parser):
-  parser.add_argument('--train_data')
+def add_document_args(parser: argparse.ArgumentParser):
+  parser.add_argument('--train_data', required=True)
 
 
-def add_preprocess_args(preprocess_name, parser):
-  parser.add_argument("--tex", help="$\\TeX$")
-  parser.add_argument("--normal", help="素朴な方法")
+def add_preprocess_args(
+    preprocess_name: str,
+    parser: argparse.ArgumentParser):
+  pass

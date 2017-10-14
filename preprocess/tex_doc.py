@@ -13,6 +13,7 @@ class NoUpdateCloseState:
 
 class SafelyCloseState:
   head: int
+
   def close(self, n: int):
     return EndOfWordState(head=self.head, tail=n-1)
 
