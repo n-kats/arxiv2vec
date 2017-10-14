@@ -102,3 +102,8 @@ ENV/
 
 # data directory
 data/
+
+# sandxbox
+sandbox/
+
+tmp/
