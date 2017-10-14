@@ -17,9 +17,7 @@ def main():
     args = cli.parse_train_args(unknown)
     train.run(args)
   elif mode == "infer":
-    infer.run(
-        document=args.document,
-        load_model=args.load_model)
+    infer.run(args)
   elif mode == "dataset":
     dataset_mode = args.dataset_mode
     if dataset_mode == "json_arxiv":
