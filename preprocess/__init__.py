@@ -39,6 +39,9 @@ class TeXMixedTextPreprocessor(AbsPreprocessor):
     return split_tex_doc(line)
 
   def _fix_token(self, token: str) -> str:
+    token = token.lower()
+    if token[-1] in ",.":
+      token = token[:-1]
     return token
 
   def _accept(self, token: str) -> bool:
