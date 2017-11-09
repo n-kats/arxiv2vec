@@ -12,9 +12,9 @@ class Doc2VecModel:
 
   def train(self, train_docs: Iterator[str]):
     train_corpus = [TaggedDocument(self._preprocessor.preprocess(txt), [i]) for i, txt in enumerate(train_docs)]
-    model = Doc2Vec(size=100, min_count=2, iter=100000)
+    model = Doc2Vec(size=50)
     model.build_vocab(train_corpus)
-    model.train(train_corpus, total_examples=model.corpus_count, epochs=5)
+    model.train(train_corpus, total_examples=model.corpus_count, epochs=500)
     self._model = model
 
   def save(self, path: str):
