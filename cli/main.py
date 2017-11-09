@@ -2,6 +2,7 @@ import sys
 
 import cli
 import dataset.json_arxiv
+import dataset.merge_json
 from cli import parse_args
 from actions import train, infer
 
@@ -22,6 +23,8 @@ def main():
     dataset_mode = args.dataset_mode
     if dataset_mode == "json_arxiv":
       dataset.json_arxiv.run(args.input, args.output)
+    elif dataset_mode == "merge_json":
+      dataset.merge_json.run(args.input, args.output)
     else:
       raise NotImplementedError(f"対応するモード({dataset_mode})が未実装です")
   else:

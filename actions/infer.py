@@ -1,5 +1,6 @@
 from argparse import Namespace
 import pickle
+import json
 from typing import (
     Any,
     Optional,
@@ -70,15 +71,22 @@ def find_neighbors(model: Model, args: Namespace):
   """
   近傍探索を行う
   """
-  targets = open(args.train_data).readlines()
+  targets = _load_train_data_to_show(args.train_data)
   for input_ in args.input_texts:
     print(f"--- INPUT: {input_}")
+    print("".join(open(input_).readlines()))
     vec = model.infer_vector(_get_input_text(input_))
     top_scores = model.find_neighbors(vec)
     for order, (i, score) in enumerate(top_scores):
       print("---", order + 1, i, score)
-      print(targets[i])
+      print(targets[i]["title"])
+      print(targets[i]["id"])
+      print(targets[i]["summary"][:160])
 
 
 def _get_input_text(fname: str) -> str:
   return "".join(open(fname))
+
+
+def _load_train_data_to_show(train_data: str):
+  return json.load(open(train_data))
