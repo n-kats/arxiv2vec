@@ -90,3 +90,17 @@ def _get_input_text(fname: str) -> str:
 
 def _load_train_data_to_show(train_data: str):
   return json.load(open(train_data))
+
+
+@by_action_name()
+def output_vectors(model: Model, args: Namespace):
+  """
+  文章に対し評価し、そのベクトルを書き込む
+  """
+  texts = args.input_texts.copy()
+  vectors = []
+  for input_ in args.input_texts:
+    text = _get_input_text(input_)
+    vectors.append(model.infer_vector(text))
+  vectors = np.array(vectors)
+  np.savez(args.output_npz, texts=texts, vectors=vectors)

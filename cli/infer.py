@@ -9,6 +9,8 @@ def add_argument_to_infer(parser: argparse.ArgumentParser):
       subparsers.add_parser("compare", help="比較"))
   add_argument_to_find_neighbors(
       subparsers.add_parser("find_neighbors", help="近傍探索"))
+  add_argument_to_output_vectors(
+      subparsers.add_parser("output_vectors", help="近傍探索"))
 
 
 def add_argument_to_show_vector(parser: argparse.ArgumentParser):
@@ -21,6 +23,11 @@ def add_argument_to_compare(parser: argparse.ArgumentParser):
 
 def add_argument_to_find_neighbors(parser: argparse.ArgumentParser):
   parser.add_argument('--train_data')
+  _add_infer_common_args(parser)
+
+
+def add_argument_to_output_vectors(parser: argparse.ArgumentParser):
+  parser.add_argument('--output_npz', required=True)
   _add_infer_common_args(parser)
 
 
